@@ -12,6 +12,9 @@ public class MegaTankGame extends BasicGame {
 	private LinkedList<Entity> entities;
 	public static float GameWidth = 1024;
 	public static float GameHeight = 720;
+	public static float monsterspawnX = 1400;
+	public static float monsterspawnY = 850;
+
 	static boolean Ispress = false;
 
 	public MegaTankGame(String title) {
@@ -42,10 +45,13 @@ public class MegaTankGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		
-		
+
 		entities.add(new Bullet(GameWidth / 2, GameHeight / 2));
 		entities.add(new Tank(GameWidth / 2, GameHeight / 2));
+		entities.add(new FatMonster(300, 450));
+		entities.add(new BossMonster(600, 800));
+		entities.add(new NoobMonster(1200, 450));
+		entities.add(new Heart(900, 620));
 	}
 
 	@Override
@@ -60,7 +66,7 @@ public class MegaTankGame extends BasicGame {
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SPACE) {
 			Ispress = true;
-			Tank.thiszetar=Tank.getZetar();
+			Tank.thiszetar = Tank.getZetar();
 			System.out.println("Press!!");
 			// isStarted = true;
 			// dot.jump();
