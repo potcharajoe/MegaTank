@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Random;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -14,6 +15,12 @@ public class MegaTankGame extends BasicGame {
 	public static float GameHeight = 720;
 	public static float monsterspawnX = 1400;
 	public static float monsterspawnY = 850;
+	public static float MAXX;
+	public static float MINX;
+	public static float RAN;
+	public static float MAXY;
+	public static float MINY;
+	public static float TIME;
 
 	static boolean Ispress = false;
 
@@ -48,10 +55,18 @@ public class MegaTankGame extends BasicGame {
 
 		entities.add(new Bullet(GameWidth / 2, GameHeight / 2));
 		entities.add(new Tank(GameWidth / 2, GameHeight / 2));
-		entities.add(new FatMonster(300, 450));
-		entities.add(new BossMonster(600, 800));
-		entities.add(new NoobMonster(1200, 450));
-		entities.add(new Heart(900, 620));
+		for (int x = 0; x < 9; x++) {
+			entities.add(new FatMonster(500, 500));
+		}
+		for (int m = 0; m < 6; m++) {
+			entities.add(new BossMonster(600, 800));
+		}
+		for (int k = 0; k < 10; k++) {
+			entities.add(new NoobMonster(1200, 450));
+		}
+		for (int j = 0; j < 5; j++) {
+			entities.add(new Heart(900, 620));
+		}
 	}
 
 	@Override
@@ -59,6 +74,37 @@ public class MegaTankGame extends BasicGame {
 			throws SlickException {
 		for (Entity entity : entities) {
 			entity.update(delta);
+		}
+		Randomrange();
+		TIME += 0.03f;
+		System.out.println(TIME);
+		// System.out.println(RAN);
+		// System.out.println(MAXX);
+		// System.out.println(MINX);
+		// System.out.println(Math.random() * (MAXX - MINX) + MINX);
+		// y = (float) Math.random() * 121 + 180;
+
+	}
+
+	public static void Randomrange() {
+		RAN = (float) (Math.random() * 1000);
+		if (RAN > 500) {
+			if (RAN > 750) {
+				MAXX = 1300;
+				MINX = 1150;
+			} else {
+				MAXX = -120;
+				MINX = -300;
+			}
+		} else {
+			if (RAN < 250) {
+				MAXY = 1050;
+				MINY = 800;
+			} else {
+				MAXY = -100;
+				MINY = -350;
+			}
+
 		}
 
 	}
