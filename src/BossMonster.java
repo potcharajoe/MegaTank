@@ -5,7 +5,9 @@ import org.newdawn.slick.SlickException;
 public class BossMonster implements Entity {
 	private float x, y;
 	private Image bossmonster;
-	private float bosssize = 94;
+	private float bossmonstersize = 94;
+	private float dY,dX;
+	private float bosstime = 500;
 
 	public BossMonster(float Mx, float My) throws SlickException {
 		this.x = Mx;
@@ -20,7 +22,8 @@ public class BossMonster implements Entity {
 			y = (float) (Math.random()
 					* (MegaTankGame.MAXY - MegaTankGame.MINY) + MegaTankGame.MINY);
 		}
-
+		dX = MegaTankGame.GameWidth / 2 - bossmonstersize / 2 - x;
+		dY = MegaTankGame.GameHeight / 2 - bossmonstersize / 2 - y;
 		bossmonster = new Image("res/bossmonster.png");
 
 	}
@@ -32,25 +35,26 @@ public class BossMonster implements Entity {
 
 	@Override
 	public void update(int delta) {
-		if (MegaTankGame.TIME > 25) {
-			if (x > MegaTankGame.GameWidth / 2 - bosssize / 2) {
-				if (y > MegaTankGame.GameHeight / 2 - bosssize / 2) {
-					y -= 1;
-					x -= 1;
-				} else {
-					y += 1;
-					x -= 1;
-				}
-			} else {
-				if (y > MegaTankGame.GameHeight / 2 - bosssize / 2) {
-					y -= 1;
-					x += 1;
-				} else {
-					y += 1;
-					x += 1;
-				}
-			}
+		
+		if (MegaTankGame.TIME > 10) {
+			
+			if(Math.abs((x + bossmonstersize / 2) - MegaTankGame.GameWidth/2) > 30
+					&& Math.abs((y + bossmonstersize / 2) - MegaTankGame.GameHeight/2) > 30){
+					x += dX / bosstime;
+					y += dY / bosstime;
+					}
 		}
+	
+
+	}
+	public boolean collision(float bulletX, float bulletY) {
+		if (Math.abs((x + bossmonstersize / 2) - bulletX) < 40
+				&& Math.abs((y + bossmonstersize / 2) - bulletY) < 40) {
+			MegaTankGame.score += 1;
+			return true;
+		}
+		return false;
+
 	}
 
 }

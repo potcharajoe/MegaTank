@@ -1,4 +1,3 @@
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -7,10 +6,15 @@ public class FatMonster implements Entity {
 
 	protected float x;
 	protected float y;
-	protected static Image fatmonster;
+	private float dX;
+	private float dY;
+	protected Image fatmonster;
 	protected float randomspawnX;
 	protected float randomspawnY;
 	protected float fatmonstersize = 85;
+	private float fattime = 300;
+
+	// private float zetar;
 
 	// private float zetar;
 
@@ -28,6 +32,8 @@ public class FatMonster implements Entity {
 					* (MegaTankGame.MAXY - MegaTankGame.MINY) + MegaTankGame.MINY);
 		}
 		fatmonster = new Image("res/fatmonster.png");
+		dX = MegaTankGame.GameWidth / 2 - fatmonstersize / 2 - x;
+		dY = MegaTankGame.GameHeight / 2 - fatmonstersize / 2 - y;
 
 	}
 
@@ -37,34 +43,32 @@ public class FatMonster implements Entity {
 
 	}
 
-	// private void MonsterMove(float Mx, float My) {
-	//
-	// zetar=((float) Math.acos(((Mx - 512))
-	// / Math.sqrt((Math.pow(Mx - 512, 2)) + (Math.pow(My - 360, 2)))));
-	//
-	// }
-
+	
 	@Override
 	public void update(int delta) {
+
+		System.out.println(dX);
+		System.out.println(dY);
+		System.out.println(x);
+		System.out.println(y);
 		if (MegaTankGame.TIME > 10) {
-			if (x > MegaTankGame.GameWidth / 2 - fatmonstersize / 2) {
-				if (y > MegaTankGame.GameHeight / 2 - fatmonstersize / 2) {
-					x -= 1;
-					y -= 1;
-				} else {
-					y += 1;
-					x -= 1;
-				}
-			} else {
-				if (y > MegaTankGame.GameHeight / 2 - fatmonstersize / 2) {
-					y -= 1;
-					x += 1;
-				} else {
-					y += 1;
-					x += 1;
-				}
+			
+			if(Math.abs((x + fatmonstersize / 2) - MegaTankGame.GameWidth/2) > 30
+			&& Math.abs((y + fatmonstersize / 2) - MegaTankGame.GameHeight/2) > 30){
+			x += dX / fattime;
+			y += dY / fattime;
 			}
 		}
+	}
+
+	public boolean collision(float bulletX, float bulletY) {
+		if (Math.abs((x + fatmonstersize / 2) - bulletX) < 40
+				&& Math.abs((y + fatmonstersize / 2) - bulletY) < 40) {
+			MegaTankGame.score += 1;
+			return true;
+		}
+		return false;
+
 	}
 
 }

@@ -21,7 +21,13 @@ public class MegaTankGame extends BasicGame {
 	public static float MAXY;
 	public static float MINY;
 	public static float TIME;
-
+	static float score = 0;
+	private Bullet bullet;
+	private FatMonster fatMonster;
+	private NoobMonster noobMonster;
+	private BossMonster bossMonster;
+	private Heart heart;
+	private Tank tank;
 	static boolean Ispress = false;
 
 	public MegaTankGame(String title) {
@@ -52,21 +58,27 @@ public class MegaTankGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		bullet = new Bullet(GameWidth / 2, GameHeight / 2);
+		entities.add(bullet);
+		tank = new Tank(GameWidth / 2, GameHeight / 2);
+		entities.add(tank);
+		for (int i = 0; i < 10; i++) {
+			fatMonster = new FatMonster(500, 500);
+			entities.add(fatMonster);
+		}
+		for (int j = 0; j < 8; j++) {
+			noobMonster = new NoobMonster(500, 500);
+			entities.add(noobMonster);
+		}
+		for (int k = 0; k < 5; k++) {
+			bossMonster = new BossMonster(500, 500);
+			entities.add(bossMonster);
+		}
+		for (int l = 0; l < 4; l++) {
+			heart = new Heart(500, 500);
+			entities.add(heart);
+		}
 
-		entities.add(new Bullet(GameWidth / 2, GameHeight / 2));
-		entities.add(new Tank(GameWidth / 2, GameHeight / 2));
-		for (int x = 0; x < 9; x++) {
-			entities.add(new FatMonster(500, 500));
-		}
-		for (int m = 0; m < 6; m++) {
-			entities.add(new BossMonster(600, 800));
-		}
-		for (int k = 0; k < 10; k++) {
-			entities.add(new NoobMonster(1200, 450));
-		}
-		for (int j = 0; j < 5; j++) {
-			entities.add(new Heart(900, 620));
-		}
 	}
 
 	@Override
@@ -76,13 +88,35 @@ public class MegaTankGame extends BasicGame {
 			entity.update(delta);
 		}
 		Randomrange();
-		TIME += 0.03f;
-		System.out.println(TIME);
+		TIME += 0.1f;
+		handleCollision();
+		// System.out.println(TIME);
+		// System.out.println(TIME);
 		// System.out.println(RAN);
 		// System.out.println(MAXX);
 		// System.out.println(MINX);
 		// System.out.println(Math.random() * (MAXX - MINX) + MINX);
 		// y = (float) Math.random() * 121 + 180;
+
+	}
+
+	private void handleCollision() {
+		if (fatMonster.collision(bullet.GetX(), bullet.GetY())) {
+			System.out.println("COLLISION!!!!");
+			;
+		}
+		if (bossMonster.collision(bullet.GetX(), bullet.GetY())) {
+			System.out.println("COLLISION!!!!");
+			;
+		}
+		if (noobMonster.collision(bullet.GetX(), bullet.GetY())) {
+			System.out.println("COLLISION!!!!");
+			;
+		}
+		if (heart.collision(bullet.GetX(), bullet.GetY())) {
+			System.out.println("COLLISION!!!!");
+			;
+		}
 
 	}
 
@@ -118,5 +152,15 @@ public class MegaTankGame extends BasicGame {
 			// dot.jump();
 		}
 	}
+
+	// NUt
+	public void mouseClicked(int button, int x, int y, int clickCount) {
+		if (button == 0) {
+			Ispress = true;
+			Tank.thiszetar = Tank.getZetar();
+			System.out.println("Click!!");
+		}
+	}
+	// Nut
 
 }

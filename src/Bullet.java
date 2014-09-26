@@ -7,13 +7,22 @@ import org.newdawn.slick.SlickException;
 public class Bullet implements Entity {
 	private static float ball_size = 24;
 	private static Image bulletimage;
-	private float x, y;
+	public float x;
+	public float y;
 
 	public Bullet(float x, float y) throws SlickException {
 		this.x = x;
 		this.y = y;
 		bulletimage = new Image("res/pokeball.png");
 
+	}
+
+	public float GetX() {
+		return x + 12;
+	}
+
+	public float GetY() {
+		return y - 12;
 	}
 
 	@Override

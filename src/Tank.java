@@ -8,8 +8,8 @@ import org.newdawn.slick.Input;
 public class Tank implements Entity {
 	private float x, y;
 	private static float zetar;
-	static float thiszetar;
-	static float Q_1 = (float) (-90 / 1.6);
+	public static float thiszetar;
+	public float Q_1 = (float) (-90 / 1.6);
 	float Q_2 = (float) (-90 / 1.6);
 	float Q_3 = (float) (90 / 1.6);
 	float Q_4 = (float) (90 / 1.6);
@@ -70,7 +70,7 @@ public class Tank implements Entity {
 
 	private void Tankrotate(float Mx, float My) {
 
-		zetar=((float) Math.acos(((Mx - 512))
+		zetar = ((float) Math.acos(((Mx - 512))
 				/ Math.sqrt((Math.pow(Mx - 512, 2)) + (Math.pow(My - 360, 2)))));
 
 	}
@@ -78,7 +78,5 @@ public class Tank implements Entity {
 	public static float getZetar() {
 		return zetar;
 	}
-
-	
 
 }
