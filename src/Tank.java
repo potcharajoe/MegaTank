@@ -31,7 +31,8 @@ public class Tank implements Entity {
 		tankimage.draw(x - tanksize / 2, y - tanksize / 2);
 
 		g.drawString(mouse_position, 800, 0);
-		g.drawString("" + getZetar(), 400, 0);
+		g.drawString("" + MegaTankGame.score, 400, 0);
+		// g.drawString("" + getZetar(), 400, 0);
 
 	}
 

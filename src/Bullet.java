@@ -7,12 +7,12 @@ import org.newdawn.slick.SlickException;
 public class Bullet implements Entity {
 	private static float ball_size = 24;
 	private static Image bulletimage;
-	public float x;
-	public float y;
+	public static float x;
+	public static float y;
 
 	public Bullet(float x, float y) throws SlickException {
-		this.x = x;
-		this.y = y;
+		Bullet.x = x;
+		Bullet.y = y;
 		bulletimage = new Image("res/pokeball.png");
 
 	}
@@ -52,7 +52,7 @@ public class Bullet implements Entity {
 		}
 	}
 
-	private void BulletReset() {
+	public void BulletReset() {
 		MegaTankGame.Ispress = false;
 		x = MegaTankGame.GameWidth / 2;
 		y = MegaTankGame.GameHeight / 2;

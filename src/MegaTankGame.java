@@ -1,10 +1,10 @@
 import java.util.LinkedList;
-import java.util.Random;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -15,6 +15,7 @@ public class MegaTankGame extends BasicGame {
 	public static float GameHeight = 720;
 	public static float monsterspawnX = 1400;
 	public static float monsterspawnY = 850;
+	private float backgroundsize = 400;
 	public static float MAXX;
 	public static float MINX;
 	public static float RAN;
@@ -28,11 +29,17 @@ public class MegaTankGame extends BasicGame {
 	private BossMonster bossMonster;
 	private Heart heart;
 	private Tank tank;
+	public static float Playerhealth = 100;
+	private Image background;
+	private boolean Isgameover = false;
+	private boolean Isstart = false;
+
 	static boolean Ispress = false;
 
 	public MegaTankGame(String title) {
 		super(title);
 		entities = new LinkedList<>();
+
 	}
 
 	public static void main(String[] args) {
@@ -50,6 +57,9 @@ public class MegaTankGame extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+		background = new Image("res/ground.png");
+		background.draw(GameWidth / 2 - backgroundsize / 2, GameHeight / 2
+				- backgroundsize / 2);
 		for (Entity entity : entities) {
 			entity.render(g);
 		}
@@ -62,19 +72,19 @@ public class MegaTankGame extends BasicGame {
 		entities.add(bullet);
 		tank = new Tank(GameWidth / 2, GameHeight / 2);
 		entities.add(tank);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 4; i++) {
 			fatMonster = new FatMonster(500, 500);
 			entities.add(fatMonster);
 		}
-		for (int j = 0; j < 8; j++) {
-			noobMonster = new NoobMonster(500, 500);
+		for (int j = 0; j < 10; j++) {
+			noobMonster = new NoobMonster(200, 100);
 			entities.add(noobMonster);
 		}
-		for (int k = 0; k < 5; k++) {
+		for (int k = 0; k < 2; k++) {
 			bossMonster = new BossMonster(500, 500);
 			entities.add(bossMonster);
 		}
-		for (int l = 0; l < 4; l++) {
+		for (int l = 0; l < 3; l++) {
 			heart = new Heart(500, 500);
 			entities.add(heart);
 		}
@@ -84,38 +94,33 @@ public class MegaTankGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		for (Entity entity : entities) {
-			entity.update(delta);
+		if (Isgameover) {
+			{
+				// if(Isstart = true){
+				// container.reinit();
+				// Isgameover = false;
+				// Isstart=false;}
+			}
+		} else {
+			for (Entity entity : entities) {
+				entity.update(delta);
+			}
+			Randomrange();
+			checkHealth();
+
+			TIME += 0.05f;
+			System.out.println(Playerhealth);
 		}
-		Randomrange();
-		TIME += 0.1f;
-		handleCollision();
-		// System.out.println(TIME);
-		// System.out.println(TIME);
-		// System.out.println(RAN);
-		// System.out.println(MAXX);
-		// System.out.println(MINX);
-		// System.out.println(Math.random() * (MAXX - MINX) + MINX);
-		// y = (float) Math.random() * 121 + 180;
 
 	}
 
-	private void handleCollision() {
-		if (fatMonster.collision(bullet.GetX(), bullet.GetY())) {
-			System.out.println("COLLISION!!!!");
-			;
+	private void checkHealth() {
+		if (Playerhealth >= 100) {
+			Playerhealth = 100;
 		}
-		if (bossMonster.collision(bullet.GetX(), bullet.GetY())) {
-			System.out.println("COLLISION!!!!");
-			;
-		}
-		if (noobMonster.collision(bullet.GetX(), bullet.GetY())) {
-			System.out.println("COLLISION!!!!");
-			;
-		}
-		if (heart.collision(bullet.GetX(), bullet.GetY())) {
-			System.out.println("COLLISION!!!!");
-			;
+		if (Playerhealth < 0) {
+			Isgameover = true;
+
 		}
 
 	}
@@ -151,6 +156,11 @@ public class MegaTankGame extends BasicGame {
 			// isStarted = true;
 			// dot.jump();
 		}
+		// if (key == Input.KEY_Y) {
+		// Isgameover = false;
+		// Isstart = true;
+
+		// }
 	}
 
 	// NUt
