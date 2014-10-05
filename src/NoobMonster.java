@@ -9,7 +9,7 @@ public class NoobMonster extends Monster {
 		monstersize = 105;
 		monstertime = 320;
 		collisionrange = 40;
-		monsterHP=1;
+		monsterHP = 1;
 	}
 }
 // private float x, y;

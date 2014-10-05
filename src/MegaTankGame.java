@@ -31,8 +31,9 @@ public class MegaTankGame extends BasicGame {
 	private Tank tank;
 	public static float Playerhealth = 100;
 	private Image background;
+	private float countwave = 0;
 	private boolean Isgameover = false;
-	private boolean Isstart = false;
+	private boolean Newwave = false;
 
 	static boolean Ispress = false;
 
@@ -94,6 +95,14 @@ public class MegaTankGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
+		checkNewwave();
+		System.out.println(countwave);
+		 if (Newwave) {
+		 container.reinit();
+		 Newwave = false;
+		// Playerhealth = 100;
+		// Isgameover = false;
+		 }
 		if (Isgameover) {
 			{
 				// if(Isstart = true){
@@ -107,7 +116,7 @@ public class MegaTankGame extends BasicGame {
 			}
 			Randomrange();
 			checkHealth();
-
+			countwave+=0.08f;
 			TIME += 0.05f;
 			System.out.println(Playerhealth);
 		}
@@ -119,6 +128,7 @@ public class MegaTankGame extends BasicGame {
 			Playerhealth = 100;
 		}
 		if (Playerhealth < 0) {
+			Playerhealth = 0;
 			Isgameover = true;
 
 		}
@@ -146,6 +156,13 @@ public class MegaTankGame extends BasicGame {
 
 		}
 
+	}
+	public void checkNewwave(){
+		if(countwave>20){
+			countwave = 0;
+			Newwave = true;
+		}
+		
 	}
 
 	public void keyPressed(int key, char c) {

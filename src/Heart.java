@@ -10,6 +10,7 @@ public class Heart extends Monster {
 		monstersize = 56;
 		monstertime = 750;
 		collisionrange = 30;
+		monsterHP = 2;
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class Heart extends Monster {
 				;
 			}
 			MegaTankGame.Playerhealth += 20;
-			System.out.println("COLLISIONHEART!!!!");
+			//System.out.println("COLLISIONHEART!!!!");
 			bullet.BulletReset();
 
 			// noobMonster.remove();
