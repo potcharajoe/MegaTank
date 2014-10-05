@@ -6,7 +6,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class MegaTankGame extends BasicGame {
 
@@ -32,11 +34,9 @@ public class MegaTankGame extends BasicGame {
 	private SuperBossMonster superBoss;
 	public static float Playerhealth = 100;
 	private Image background;
-	private float countwave = 0;
 	private boolean Isgameover = false;
-	// private boolean Newwave = false;
-	// private boolean Isstart = false;
-
+	private float countwave = 0;
+	private Sound shoot,lose;
 	static boolean Ispress = false;
 
 	public MegaTankGame(String title) {
@@ -75,7 +75,8 @@ public class MegaTankGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-
+		shoot = new Sound("res/shot.wav");
+		lose = new Sound("res/loose.wav");
 		bullet = new Bullet(GameWidth / 2, GameHeight / 2);
 		entities.add(bullet);
 		tank = new Tank(GameWidth / 2, GameHeight / 2);
@@ -114,12 +115,13 @@ public class MegaTankGame extends BasicGame {
 		// }
 		if (Isgameover) {
 			{
-
+//				lose.play();
 			}
 		} else {
 			for (Entity entity : entities) {
 				entity.update(delta);
 			}
+			// map.play();
 			Randomrange();
 			checkHealth();
 			countwave += 0.08f;
@@ -134,6 +136,7 @@ public class MegaTankGame extends BasicGame {
 			Playerhealth = 100;
 		}
 		if (Playerhealth < 0) {
+			lose.play();
 			Playerhealth = 0;
 			Isgameover = true;
 
@@ -176,7 +179,7 @@ public class MegaTankGame extends BasicGame {
 		if (key == Input.KEY_SPACE) {
 			Ispress = true;
 			Tank.thiszetar = Tank.getZetar();
-			System.out.println("Press!!");
+			shoot.play();
 			// isStarted = true;
 			// dot.jump();
 		}
@@ -189,6 +192,7 @@ public class MegaTankGame extends BasicGame {
 		if (button == 0) {
 			Ispress = true;
 			Tank.thiszetar = Tank.getZetar();
+			shoot.play();
 			System.out.println("Click!!");
 		}
 	}

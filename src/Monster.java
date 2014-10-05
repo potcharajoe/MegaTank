@@ -1,19 +1,22 @@
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class Monster implements Entity {
 
 	protected float x, y, dX, dY, monstersize, monstertime, monsterHP;
 	protected Image monsterimage;
 	protected float collisionrange;
-
+	protected Sound hit,dead;
 	protected float groundsize = 200;
 
 	protected Bullet bullet = new Bullet(MegaTankGame.GameWidth / 2,
 			MegaTankGame.GameHeight / 2);
 
 	public Monster(float Mx, float My) throws SlickException {
+		hit = new Sound("res/hit.wav");
+		dead = new Sound("res/start.wav");
 		this.x = Mx;
 		this.y = My;
 		MegaTankGame.Randomrange();
@@ -65,8 +68,10 @@ public class Monster implements Entity {
 
 		if (collision(bullet.GetX(), bullet.GetY())) {
 			monsterHP -= 1;
+			hit.play();
 			{
 				if (monsterHP == 0) {
+					dead.play();
 					MegaTankGame.Randomrange();
 					if (MegaTankGame.RAN > 500) {
 						Randomone();

@@ -3,12 +3,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class Bullet implements Entity {
 	private static float ball_size = 24;
 	private static Image bulletimage;
 	public static float x;
 	public static float y;
+	
 
 	public Bullet(float x, float y) throws SlickException {
 		Bullet.x = x;
