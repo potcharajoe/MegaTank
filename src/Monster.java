@@ -51,9 +51,12 @@ public class Monster implements Entity {
 			y += dY / monstertime;
 		}
 		handleCollision();
-
+		if(monsterHP == 0){
+			MegaTankGame.score+=1;
+			monsterHP = 1;
+		}
 		if (nearground(x, y)) {
-			MegaTankGame.Playerhealth -= 0.05f;
+			MegaTankGame.Playerhealth -= 0.07f;
 		}
 
 	}
@@ -71,10 +74,8 @@ public class Monster implements Entity {
 						Randomtwo();
 					}
 				}
-				System.out.println("COLLISION!!!!");
 				bullet.BulletReset();
 
-				// noobMonster.remove();
 			}
 			;
 		}
@@ -83,7 +84,7 @@ public class Monster implements Entity {
 	public boolean collision(float bulletX, float bulletY) {
 		if (Math.abs((x + monstersize / 2) - bulletX) < collisionrange
 				&& Math.abs((y + monstersize / 2) - bulletY) < collisionrange) {
-			MegaTankGame.score += 1;
+			//MegaTankGame.score += 1;
 			return true;
 		}
 		return false;

@@ -13,8 +13,6 @@ public class Tank implements Entity {
 	float Q_2 = (float) (-90 / 1.6);
 	float Q_3 = (float) (90 / 1.6);
 	float Q_4 = (float) (90 / 1.6);
-	private String mouse_position = "Mouse Position X : " + Mouse.getX()
-			+ "\nMouse Position Y : " + Mouse.getY();
 
 	private Image tankimage;
 	private float tanksize = 150;
@@ -29,16 +27,21 @@ public class Tank implements Entity {
 	@Override
 	public void render(Graphics g) {
 		tankimage.draw(x - tanksize / 2, y - tanksize / 2);
-		g.drawString("" +MegaTankGame.Playerhealth, 800, 0);
-//		g.drawString(mouse_position, 800, 0);
-		g.drawString("" + MegaTankGame.score, 400, 0);
-		// g.drawString("" + getZetar(), 400, 0);
+		g.drawString("PlayerHP : " + (int) MegaTankGame.Playerhealth, 800, 10);
+		// g.drawString(mouse_position, 800, 0);
+		g.drawString("SCORE : " + (int) MegaTankGame.score, 500, 10);
+		g.drawString("TIME : " + (int) MegaTankGame.TIME, 200, 10);
+		// if(MegaTankGame.Playerhealth == 0){
+		// g.drawString("YOU LOSE",
+		// MegaTankGame.GameWidth,MegaTankGame.GameHeight);
+		// }
+		// // g.drawString("" + getZetar(), 400, 0);
 
 	}
 
 	@Override
 	public void update(int delta) {
-		GetMouseLocation();
+		// GetMouseLocation();
 		Tankrotate(Mouse.getX(), Mouse.getY());
 		Tankturn();
 
@@ -64,10 +67,10 @@ public class Tank implements Entity {
 
 	}
 
-	private void GetMouseLocation() {
-		mouse_position = "Mouse Position X : " + Mouse.getX()
-				+ "\nMouse Position Y : " + Mouse.getY();
-	}
+	// private void GetMouseLocation() {
+	// mouse_position = "Mouse Position X : " + Mouse.getX()
+	// + "\nMouse Position Y : " + Mouse.getY();
+	// }
 
 	private void Tankrotate(float Mx, float My) {
 

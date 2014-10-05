@@ -29,11 +29,13 @@ public class MegaTankGame extends BasicGame {
 	private BossMonster bossMonster;
 	private Heart heart;
 	private Tank tank;
+	private SuperBossMonster superBoss;
 	public static float Playerhealth = 100;
 	private Image background;
 	private float countwave = 0;
 	private boolean Isgameover = false;
-	private boolean Newwave = false;
+	// private boolean Newwave = false;
+	// private boolean Isstart = false;
 
 	static boolean Ispress = false;
 
@@ -58,6 +60,10 @@ public class MegaTankGame extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
+		// if (Playerhealth == 0) {
+		// g.drawString("YOU LOSE", GameWidth, GameHeight);
+		// }
+
 		background = new Image("res/ground.png");
 		background.draw(GameWidth / 2 - backgroundsize / 2, GameHeight / 2
 				- backgroundsize / 2);
@@ -69,46 +75,46 @@ public class MegaTankGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+
 		bullet = new Bullet(GameWidth / 2, GameHeight / 2);
 		entities.add(bullet);
 		tank = new Tank(GameWidth / 2, GameHeight / 2);
 		entities.add(tank);
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			fatMonster = new FatMonster(500, 500);
 			entities.add(fatMonster);
+		}
+		for (int p = 0; p < 2; p++) {
+			superBoss = new SuperBossMonster(500, 500);
+			entities.add(superBoss);
 		}
 		for (int j = 0; j < 10; j++) {
 			noobMonster = new NoobMonster(200, 100);
 			entities.add(noobMonster);
 		}
-		for (int k = 0; k < 2; k++) {
+		for (int k = 0; k < 4; k++) {
 			bossMonster = new BossMonster(500, 500);
 			entities.add(bossMonster);
 		}
-		for (int l = 0; l < 3; l++) {
+		for (int l = 0; l < 5; l++) {
 			heart = new Heart(500, 500);
 			entities.add(heart);
 		}
-
 	}
 
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-		checkNewwave();
-		System.out.println(countwave);
-		 if (Newwave) {
-		 container.reinit();
-		 Newwave = false;
-		// Playerhealth = 100;
-		// Isgameover = false;
-		 }
+		// checkNewwave();
+		// System.out.println(countwave);
+		// if (Newwave) {
+		// container.reinit();
+		// Newwave = false;
+		//
+		// }
 		if (Isgameover) {
 			{
-				// if(Isstart = true){
-				// container.reinit();
-				// Isgameover = false;
-				// Isstart=false;}
+
 			}
 		} else {
 			for (Entity entity : entities) {
@@ -116,7 +122,7 @@ public class MegaTankGame extends BasicGame {
 			}
 			Randomrange();
 			checkHealth();
-			countwave+=0.08f;
+			countwave += 0.08f;
 			TIME += 0.05f;
 			System.out.println(Playerhealth);
 		}
@@ -157,13 +163,14 @@ public class MegaTankGame extends BasicGame {
 		}
 
 	}
-	public void checkNewwave(){
-		if(countwave>20){
-			countwave = 0;
-			Newwave = true;
-		}
-		
-	}
+
+	// public void checkNewwave() {
+	// if (countwave > 30) {
+	// countwave = 0;
+	// Newwave = true;
+	// }
+	//
+	// }
 
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SPACE) {
@@ -173,14 +180,11 @@ public class MegaTankGame extends BasicGame {
 			// isStarted = true;
 			// dot.jump();
 		}
-		// if (key == Input.KEY_Y) {
-		// Isgameover = false;
+		// if (key == Input.KEY_ENTER) {
 		// Isstart = true;
-
 		// }
 	}
 
-	// NUt
 	public void mouseClicked(int button, int x, int y, int clickCount) {
 		if (button == 0) {
 			Ispress = true;
