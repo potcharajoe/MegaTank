@@ -8,7 +8,7 @@ public class Monster implements Entity {
 	protected float x, y, dX, dY, monstersize, monstertime, monsterHP;
 	protected Image monsterimage;
 	protected float collisionrange;
-	protected Sound hit,dead;
+	protected Sound hit, dead;
 	protected float groundsize = 200;
 
 	protected Bullet bullet = new Bullet(MegaTankGame.GameWidth / 2,
@@ -25,8 +25,8 @@ public class Monster implements Entity {
 		} else {
 			Randomtwo();
 		}
-		dX = MegaTankGame.GameWidth / 2 - monstersize / 2 - x;
-		dY = MegaTankGame.GameHeight / 2 - monstersize / 2 - y;
+		dX = GetdX();
+		dY = GetdY();
 
 	}
 
@@ -54,12 +54,12 @@ public class Monster implements Entity {
 			y += dY / monstertime;
 		}
 		handleCollision();
-		if(monsterHP == 0){
-			MegaTankGame.score+=1;
+		if (monsterHP == 0) {
+			MegaTankGame.score += 1;
 			monsterHP = 1;
 		}
 		if (nearground(x, y)) {
-			MegaTankGame.Playerhealth -= 0.07f;
+			MegaTankGame.Playerhealth -= 0.05f;
 		}
 
 	}
@@ -78,6 +78,8 @@ public class Monster implements Entity {
 					} else {
 						Randomtwo();
 					}
+					dX = GetdX();
+					dY = GetdY();
 				}
 				bullet.BulletReset();
 
@@ -89,7 +91,7 @@ public class Monster implements Entity {
 	public boolean collision(float bulletX, float bulletY) {
 		if (Math.abs((x + monstersize / 2) - bulletX) < collisionrange
 				&& Math.abs((y + monstersize / 2) - bulletY) < collisionrange) {
-			//MegaTankGame.score += 1;
+			// MegaTankGame.score += 1;
 			return true;
 		}
 		return false;
@@ -103,6 +105,16 @@ public class Monster implements Entity {
 			return true;
 		}
 		return false;
+
+	}
+
+	public float GetdX() {
+		return MegaTankGame.GameWidth / 2 - monstersize / 2 - x;
+
+	}
+
+	public float GetdY() {
+		return MegaTankGame.GameHeight / 2 - monstersize / 2 - y;
 
 	}
 }

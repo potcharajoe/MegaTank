@@ -1,4 +1,3 @@
-
 import org.newdawn.slick.Graphics;
 
 public interface Entity {

@@ -10,7 +10,6 @@ public class Bullet implements Entity {
 	private static Image bulletimage;
 	public static float x;
 	public static float y;
-	
 
 	public Bullet(float x, float y) throws SlickException {
 		Bullet.x = x;

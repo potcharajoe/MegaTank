@@ -6,7 +6,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
@@ -35,8 +34,7 @@ public class MegaTankGame extends BasicGame {
 	public static float Playerhealth = 100;
 	private Image background;
 	private boolean Isgameover = false;
-	private float countwave = 0;
-	private Sound shoot,lose;
+	private Sound shoot, lose;
 	static boolean Ispress = false;
 
 	public MegaTankGame(String title) {
@@ -115,7 +113,7 @@ public class MegaTankGame extends BasicGame {
 		// }
 		if (Isgameover) {
 			{
-//				lose.play();
+				// lose.play();
 			}
 		} else {
 			for (Entity entity : entities) {
@@ -124,7 +122,7 @@ public class MegaTankGame extends BasicGame {
 			// map.play();
 			Randomrange();
 			checkHealth();
-			countwave += 0.08f;
+			//countwave += 0.08f;
 			TIME += 0.05f;
 			System.out.println(Playerhealth);
 		}
@@ -196,6 +194,5 @@ public class MegaTankGame extends BasicGame {
 			System.out.println("Click!!");
 		}
 	}
-	// Nut
 
 }
