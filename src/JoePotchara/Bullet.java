@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -15,7 +17,6 @@ public class Bullet implements Entity {
 		Bullet.x = x;
 		Bullet.y = y;
 		bulletimage = new Image("res/pokeball.png");
-
 	}
 
 	public float GetX() {
@@ -29,7 +30,6 @@ public class Bullet implements Entity {
 	@Override
 	public void render(Graphics g) {
 		bulletimage.draw(x - ball_size / 2, y - ball_size / 2);
-
 	}
 
 	@Override
@@ -39,8 +39,8 @@ public class Bullet implements Entity {
 				x += 100 * (float) Math.cos(-Tank.thiszetar);
 				y += 100 * (float) Math.sin(-Tank.thiszetar);
 			} else {
-				x += 80 * (float) Math.cos(Tank.thiszetar);
-				y += 80 * (float) Math.sin(Tank.thiszetar);
+				x += 100 * (float) Math.cos(Tank.thiszetar);
+				y += 100 * (float) Math.sin(Tank.thiszetar);
 
 			}
 			if (x > 1024 || x < 0) {
@@ -49,7 +49,6 @@ public class Bullet implements Entity {
 			if (y > 720 || y < 0) {
 				BulletReset();
 			}
-
 		}
 	}
 
@@ -58,5 +57,4 @@ public class Bullet implements Entity {
 		x = MegaTankGame.GameWidth / 2;
 		y = MegaTankGame.GameHeight / 2;
 	}
-
 }

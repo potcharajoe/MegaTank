@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -9,6 +11,7 @@ public class FatMonster extends Monster {
 		monstertime = 600;
 		collisionrange = 40;
 		monsterHP = 4;
-
+		standardHP = 4;
+		monsterscore = 20;
 	}
 }

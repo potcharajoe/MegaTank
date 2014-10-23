@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -10,18 +12,26 @@ public class Heart extends Monster {
 		monstertime = 750;
 		collisionrange = 30;
 		monsterHP = 2;
+		standardHP = 2;
 	}
 
 	@Override
 	public void update(int delta) {
-		if (Math.abs((x + monstersize / 2) - MegaTankGame.GameWidth / 2) > 15
-				&& Math.abs((y + monstersize / 2) - MegaTankGame.GameHeight / 2) > 15) {
-			x += dX / monstertime;
-			y += dY / monstertime;
-		}
-		handleCollision();
-		if (nearground(x, y)) {
-			MegaTankGame.Playerhealth -= 0.05f;
+		if (MegaTankGame.Isstart) {
+			if (Math.abs((x + monstersize / 2) - MegaTankGame.GameWidth / 2) > 15
+					&& Math.abs((y + monstersize / 2) - MegaTankGame.GameHeight
+							/ 2) > 15) {
+				x += dX / monstertime;
+				y += dY / monstertime;
+			}
+			handleCollision();
+			if (monsterHP == 0) {
+				MegaTankGame.score += monsterscore;
+				monsterHP = standardHP;
+			}
+			if (nearground(x, y)) {
+				MegaTankGame.Playerhealth -= 0.05f;
+			}
 		}
 	}
 
@@ -39,15 +49,13 @@ public class Heart extends Monster {
 						} else {
 							Randomtwo();
 						}
+						dX = GetdX();
+						dY = GetdY();
 					}
-
 				}
-				;
 			}
 			MegaTankGame.Playerhealth += 10;
 			bullet.BulletReset();
-
 		}
-		;
 	}
 }

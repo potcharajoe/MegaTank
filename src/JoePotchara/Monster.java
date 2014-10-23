@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -10,6 +12,8 @@ public class Monster implements Entity {
 	protected float collisionrange;
 	protected Sound hit, dead;
 	protected float groundsize = 200;
+	protected float monsterscore;
+	protected float standardHP = 0;
 
 	protected Bullet bullet = new Bullet(MegaTankGame.GameWidth / 2,
 			MegaTankGame.GameHeight / 2);
@@ -27,7 +31,6 @@ public class Monster implements Entity {
 		}
 		dX = GetdX();
 		dY = GetdY();
-
 	}
 
 	protected void Randomtwo() {
@@ -43,25 +46,26 @@ public class Monster implements Entity {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(monsterimage, x, y);
-
 	}
 
 	@Override
 	public void update(int delta) {
-		if (Math.abs((x + monstersize / 2) - MegaTankGame.GameWidth / 2) > 15
-				&& Math.abs((y + monstersize / 2) - MegaTankGame.GameHeight / 2) > 15) {
-			x += dX / monstertime;
-			y += dY / monstertime;
+		if (MegaTankGame.Isstart) {
+			if (Math.abs((x + monstersize / 2) - MegaTankGame.GameWidth / 2) > 15
+					&& Math.abs((y + monstersize / 2) - MegaTankGame.GameHeight
+							/ 2) > 15) {
+				x += dX / monstertime;
+				y += dY / monstertime;
+			}
+			handleCollision();
+			if (monsterHP == 0) {
+				MegaTankGame.score += monsterscore;
+				monsterHP = standardHP;
+			}
+			if (nearground(x, y)) {
+				MegaTankGame.Playerhealth -= 0.05f;
+			}
 		}
-		handleCollision();
-		if (monsterHP == 0) {
-			MegaTankGame.score += 1;
-			monsterHP = 1;
-		}
-		if (nearground(x, y)) {
-			MegaTankGame.Playerhealth -= 0.05f;
-		}
-
 	}
 
 	protected void handleCollision() {
@@ -82,20 +86,16 @@ public class Monster implements Entity {
 					dY = GetdY();
 				}
 				bullet.BulletReset();
-
 			}
-			;
 		}
 	}
 
 	public boolean collision(float bulletX, float bulletY) {
 		if (Math.abs((x + monstersize / 2) - bulletX) < collisionrange
 				&& Math.abs((y + monstersize / 2) - bulletY) < collisionrange) {
-			// MegaTankGame.score += 1;
 			return true;
 		}
 		return false;
-
 	}
 
 	public boolean nearground(float x, float y) {
@@ -105,16 +105,13 @@ public class Monster implements Entity {
 			return true;
 		}
 		return false;
-
 	}
 
 	public float GetdX() {
 		return MegaTankGame.GameWidth / 2 - monstersize / 2 - x;
-
 	}
 
 	public float GetdY() {
 		return MegaTankGame.GameHeight / 2 - monstersize / 2 - y;
-
 	}
 }

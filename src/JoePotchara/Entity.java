@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Graphics;
 
 public interface Entity {

@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -10,6 +12,7 @@ public class SuperBossMonster extends Monster {
 		monstertime = 1000;
 		collisionrange = 40;
 		monsterHP = 20;
+		standardHP = 20;
+		monsterscore = 80;
 	}
-
 }

@@ -1,3 +1,5 @@
+package JoePotchara;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -10,5 +12,7 @@ public class NoobMonster extends Monster {
 		monstertime = 320;
 		collisionrange = 40;
 		monsterHP = 1;
+		standardHP = 1;
+		monsterscore = 5;
 	}
 }
