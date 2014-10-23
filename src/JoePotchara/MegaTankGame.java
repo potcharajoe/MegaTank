@@ -27,7 +27,9 @@ public class MegaTankGame extends BasicGame {
 	public static float MAXY;
 	public static float MINY;
 	public static float TIME;
-	static float score = 0;
+	public static float score = 0;
+	private float gameoversize = 300;
+	private float NOOBsize = 200;
 	private Bullet bullet;
 	private FatMonster fatMonster;
 	private NoobMonster noobMonster;
@@ -36,9 +38,8 @@ public class MegaTankGame extends BasicGame {
 	private Tank tank;
 	private SuperBossMonster superBoss;
 	public static float Playerhealth = 100;
-	private Image background, pikachu, logo;
+	private Image background, pikachu, logo, gameover, noobbg;
 	public static boolean Isgameover = false;
-	private boolean Playagain = false;
 	private Sound shoot, lose;
 	static boolean Ispress = false;
 	private boolean Howtoplay = true;
@@ -95,7 +96,11 @@ public class MegaTankGame extends BasicGame {
 	private void GameOverState(Graphics g) throws SlickException {
 		pikachu = new Image("res/SuperBoss.png");
 		pikachu.draw(GameWidth / 2 - 200, GameHeight / 2 - pikachusize / 2);
-		g.drawString("YOU LOSE!!!", GameWidth / 2, (GameHeight / 2) - 80);
+		gameover = new Image("res/Gameover.png");
+		gameover.draw(GameWidth / 2 - gameoversize / 2, GameHeight / 2 - 200);
+		noobbg = new Image("res/NOOB.png");
+		noobbg.draw(GameWidth / 2 - 250, GameHeight / 2 + 40);
+		g.drawString("YOU LOSE!!!", GameWidth / 2, (GameHeight / 2) - 40);
 		g.drawString("SCORE : " + (int) score, GameWidth / 2,
 				(GameHeight / 2) + 30);
 		g.drawString("SURVIVAL TIME : " + (int) TIME, GameWidth / 2,
