@@ -163,7 +163,6 @@ public class MegaTankGame extends BasicGame {
 		for (Entity entity : entities) {
 			entity.update(delta);
 		}
-
 		Randomrange();
 		checkHealth();
 		if (Isstart && !Isgameover) {
