@@ -2,6 +2,7 @@ package JoePotchara;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class NoobMonster extends Monster {
 
@@ -15,5 +16,6 @@ public class NoobMonster extends Monster {
 		monsterHP = 1;
 		standardHP = 1;
 		monsterscore = 5;
+		dead = new Sound("res/noobdead.wav");
 	}
 }

@@ -2,6 +2,7 @@ package JoePotchara;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class Heart extends Monster {
 
@@ -14,6 +15,7 @@ public class Heart extends Monster {
 		collisionrange = 30;
 		monsterHP = 2;
 		standardHP = 2;
+		dead = new Sound("res/start.wav");
 	}
 
 	@Override
@@ -29,6 +31,7 @@ public class Heart extends Monster {
 			if (monsterHP == 0) {
 				MegaTankGame.score += monsterscore;
 				monsterHP = standardHP;
+				dead.play();
 			}
 			if (nearground(x, y)) {
 				MegaTankGame.Playerhealth -= 0.05f;

@@ -21,7 +21,6 @@ public class Monster implements Entity {
 
 	public Monster(float Mx, float My) throws SlickException {
 		hit = new Sound("res/hit.wav");
-		dead = new Sound("res/start.wav");
 		this.x = Mx;
 		this.y = My;
 		MegaTankGame.Randomrange();

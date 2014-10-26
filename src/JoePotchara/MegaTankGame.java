@@ -80,7 +80,6 @@ public class MegaTankGame extends BasicGame {
 	}
 
 	private void PlaySceneState(Graphics g) throws SlickException {
-		bloodbg = new Image("res/BloodBG.png");
 		background = new Image("res/ground.png");
 		background.draw(GameWidth / 2 - backgroundsize / 2, GameHeight / 2
 				- backgroundsize / 2);
