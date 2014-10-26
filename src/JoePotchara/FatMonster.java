@@ -8,7 +8,8 @@ public class FatMonster extends Monster {
 		super(Mx, My);
 		monsterimage = new Image("res/fatmonster.png");
 		monstersize = 85;
-		monstertime = 600;
+		monstertime = 680;
+		originaltime = 680;
 		collisionrange = 40;
 		monsterHP = 4;
 		standardHP = 4;

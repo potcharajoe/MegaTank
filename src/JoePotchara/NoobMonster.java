@@ -10,6 +10,7 @@ public class NoobMonster extends Monster {
 		monsterimage = new Image("res/monster1.png");
 		monstersize = 105;
 		monstertime = 320;
+		originaltime = 320;
 		collisionrange = 40;
 		monsterHP = 1;
 		standardHP = 1;

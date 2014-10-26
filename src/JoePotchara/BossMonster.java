@@ -8,7 +8,8 @@ public class BossMonster extends Monster {
 		super(Mx, My);
 		monsterimage = new Image("res/bossmonster.png");
 		monstersize = 94;
-		monstertime = 850;
+		monstertime = 880;
+		originaltime = 880;
 		collisionrange = 40;
 		monsterHP = 8;
 		standardHP = 8;

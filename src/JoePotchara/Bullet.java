@@ -41,7 +41,6 @@ public class Bullet implements Entity {
 			} else {
 				x += 100 * (float) Math.cos(Tank.thiszetar);
 				y += 100 * (float) Math.sin(Tank.thiszetar);
-
 			}
 			if (x > 1024 || x < 0) {
 				BulletReset();

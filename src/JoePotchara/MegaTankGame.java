@@ -1,7 +1,5 @@
 package JoePotchara;
 
-import java.awt.Container;
-import java.util.Deque;
 import java.util.LinkedList;
 
 import org.newdawn.slick.AppGameContainer;
@@ -29,7 +27,6 @@ public class MegaTankGame extends BasicGame {
 	public static float TIME;
 	public static float score = 0;
 	private float gameoversize = 300;
-	private float NOOBsize = 200;
 	private Bullet bullet;
 	private FatMonster fatMonster;
 	private NoobMonster noobMonster;
@@ -38,7 +35,7 @@ public class MegaTankGame extends BasicGame {
 	private Tank tank;
 	private SuperBossMonster superBoss;
 	public static float Playerhealth = 100;
-	private Image background, pikachu, logo, gameover, noobbg;
+	private Image background, pikachu, logo, gameover, noobbg, bloodbg;
 	public static boolean Isgameover = false;
 	private Sound shoot, lose;
 	static boolean Ispress = false;
@@ -47,6 +44,7 @@ public class MegaTankGame extends BasicGame {
 	private float pikachusize = 120;
 	private float logowidth = 833;
 	public float Highscore = 0;
+	private float supertime;
 
 	public MegaTankGame(String title) {
 		super(title);
@@ -82,6 +80,7 @@ public class MegaTankGame extends BasicGame {
 	}
 
 	private void PlaySceneState(Graphics g) throws SlickException {
+		bloodbg = new Image("res/BloodBG.png");
 		background = new Image("res/ground.png");
 		background.draw(GameWidth / 2 - backgroundsize / 2, GameHeight / 2
 				- backgroundsize / 2);
@@ -139,7 +138,7 @@ public class MegaTankGame extends BasicGame {
 			fatMonster = new FatMonster(500, 500);
 			entities.add(fatMonster);
 		}
-		for (int p = 0; p < 2; p++) {
+		for (int p = 0; p < supertime; p++) {
 			superBoss = new SuperBossMonster(500, 500);
 			entities.add(superBoss);
 		}
@@ -164,6 +163,7 @@ public class MegaTankGame extends BasicGame {
 		for (Entity entity : entities) {
 			entity.update(delta);
 		}
+
 		Randomrange();
 		checkHealth();
 		if (Isstart && !Isgameover) {

@@ -9,7 +9,8 @@ public class Heart extends Monster {
 		super(Mx, My);
 		monsterimage = new Image("res/heart.png");
 		monstersize = 56;
-		monstertime = 750;
+		monstertime = 800;
+		originaltime = 800;
 		collisionrange = 30;
 		monsterHP = 2;
 		standardHP = 2;
@@ -44,6 +45,7 @@ public class Heart extends Monster {
 				{
 					if (monsterHP == 0) {
 						MegaTankGame.Randomrange();
+						monstertime = originaltime;
 						if (MegaTankGame.RAN > 500) {
 							Randomone();
 						} else {

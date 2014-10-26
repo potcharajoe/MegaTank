@@ -14,6 +14,7 @@ public class Monster implements Entity {
 	protected float groundsize = 200;
 	protected float monsterscore;
 	protected float standardHP = 0;
+	protected float originaltime = 0;
 
 	protected Bullet bullet = new Bullet(MegaTankGame.GameWidth / 2,
 			MegaTankGame.GameHeight / 2);
@@ -76,6 +77,7 @@ public class Monster implements Entity {
 			{
 				if (monsterHP == 0) {
 					dead.play();
+					monstertime = originaltime;
 					MegaTankGame.Randomrange();
 					if (MegaTankGame.RAN > 500) {
 						Randomone();
@@ -103,8 +105,9 @@ public class Monster implements Entity {
 				&& Math.abs((MegaTankGame.GameHeight / 2) - y) < groundsize) {
 			monstertime = 4000;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public float GetdX() {
