@@ -12,7 +12,7 @@ public class Heart extends Monster {
 		monstersize = 56;
 		monstertime = 800;
 		originaltime = 800;
-		collisionrange = 30;
+		collisionrange = 40;
 		monsterHP = 2;
 		standardHP = 2;
 		dead = new Sound("res/start.wav");

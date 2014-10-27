@@ -10,8 +10,8 @@ public class SuperBossMonster extends Monster {
 		super(Mx, My);
 		monsterimage = new Image("res/SuperBoss.png");
 		monstersize = 120;
-		monstertime = 1100;
-		originaltime = 1100;
+		monstertime = 900;
+		originaltime = 900;
 		collisionrange = 40;
 		monsterHP = 20;
 		standardHP = 20;

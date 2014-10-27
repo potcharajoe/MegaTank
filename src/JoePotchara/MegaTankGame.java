@@ -8,6 +8,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
@@ -35,16 +36,16 @@ public class MegaTankGame extends BasicGame {
 	private Tank tank;
 	private SuperBossMonster superBoss;
 	public static float Playerhealth = 100;
-	private Image background, pikachu, logo, gameover, noobbg, bloodbg;
+	private Image background, pikachu, logo, gameover, noobbg;
 	public static boolean Isgameover = false;
 	private Sound shoot, lose;
+	public Music battlesound, openingsound;
 	static boolean Ispress = false;
 	private boolean Howtoplay = true;
 	public static boolean Isstart = false;
 	private float pikachusize = 120;
 	private float logowidth = 833;
 	public float Highscore = 0;
-	private float supertime;
 
 	public MegaTankGame(String title) {
 		super(title);
@@ -127,6 +128,8 @@ public class MegaTankGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		battlesound = new Music("res/battle.wav");
+		openingsound = new Music("res/opening.wav");
 		shoot = new Sound("res/shot.wav");
 		lose = new Sound("res/loose.wav");
 		bullet = new Bullet(GameWidth / 2, GameHeight / 2);
@@ -137,7 +140,7 @@ public class MegaTankGame extends BasicGame {
 			fatMonster = new FatMonster(500, 500);
 			entities.add(fatMonster);
 		}
-		for (int p = 0; p < supertime; p++) {
+		for (int p = 0; p < 2; p++) {
 			superBoss = new SuperBossMonster(500, 500);
 			entities.add(superBoss);
 		}
@@ -158,7 +161,12 @@ public class MegaTankGame extends BasicGame {
 	@Override
 	public void update(GameContainer container, int delta)
 			throws SlickException {
-
+		if (!openingsound.playing() && !Isstart && Howtoplay) {
+			openingsound.loop();
+		}
+		if (!battlesound.playing() && !Isgameover && Isstart) {
+			battlesound.loop();
+		}
 		for (Entity entity : entities) {
 			entity.update(delta);
 		}
